@@ -9,7 +9,6 @@ app = FastAPI(
 
 app.include_router(health_router)
 
-
 @app.get("/")
 def root():
     return {

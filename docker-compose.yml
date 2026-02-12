@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+
+  postgres:
+    image: postgres:15
+    container_name: medvoice_postgres
+
+    environment:
+      POSTGRES_USER: medvoice
+      POSTGRES_PASSWORD: medvoice123
+      POSTGRES_DB: medvoice_db
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
