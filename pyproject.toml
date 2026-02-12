@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "medvoice-ai"
+version = "0.1.0"
+description = "Grounded medical voice assistant powered by RAG and semantic search."
+authors = ["Jesús Alvarez Heredia"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.128.8"
+uvicorn = "^0.40.0"
+python-dotenv = "^1.2.1"
+sqlalchemy = "^2.0.46"
+psycopg2-binary = "^2.9.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
