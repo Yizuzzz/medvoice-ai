@@ -20,6 +20,8 @@ greenlet = "^3.3.1"
 pgvector = "^0.4.2"
 asyncpg = "^0.31.0"
 openai = "^2.21.0"
+pypdf = "^6.7.1"
+langdetect = "^1.0.9"
 
 
 [build-system]

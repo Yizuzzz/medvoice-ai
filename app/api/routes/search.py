@@ -1,40 +1,21 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
-from pydantic import BaseModel
-from typing import List
 
 from app.db.session import get_db
-from app.services.embeddings import get_embedding
-from app.repositories.query_repository import search_similar_queries
-
+from app.schemas.search import SearchRequest, SearchResponse
+from app.repositories.guideline_repository import search_guideline_chunks
 
 router = APIRouter()
 
 
-class SearchRequest(BaseModel):
-    query: str
-    limit: int = 5
-
-
-@router.post("/search")
-async def semantic_search(
+@router.post("/search", response_model=SearchResponse)
+async def search(
     request: SearchRequest,
     db: AsyncSession = Depends(get_db)
 ):
-    embedding = get_embedding(request.query)
-
-    results = await search_similar_queries(
+    results = await search_guideline_chunks(
         db=db,
-        embedding=embedding,
-        limit=request.limit
+        query=request.query,
+        k=request.k
     )
-
-    return [
-        {
-            "id": str(row.id),
-            "question": row.question,
-            "response": row.response,
-            "distance": float(row.distance),
-        }
-        for row in results
-    ]
+    return {"results": results}
